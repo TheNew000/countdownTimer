@@ -1,0 +1,38 @@
+body{
+    background-color: #00ECB9;
+}
+
+#buttons{
+    text-align: center;
+}
+
+h1{
+    color: #396;
+    margin: 40px 0px 20px;
+    text-align: center;
+    font-size: 60px;
+}
+
+#countdown-timer1, #countdown-timer2{
+    color: white;
+    text-align: center;
+}
+
+#countdown-timer1 > div, #countdown-timer2 > div{
+    padding: 10px;
+    border-radius: 3px;
+    background-color: #00DF96;
+    display: inline-block;
+}
+
+#countdown-timer1 div > span, #countdown-timer2 div > span{
+    padding: 15px;
+    border-radius: 3px;
+    background-color: #00816A;
+    display: inline-block;
+}
+
+.small-text{
+    font-size: 28px;
+
+}

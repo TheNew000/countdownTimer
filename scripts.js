@@ -11,12 +11,12 @@ var now = Date.now();
 var slowMo;
 var time;
 
-function getNewTime(type){
-    if (type === 'reg'){
+function getNewTime(type, clock){
+    if (type === 'reg' && clock === clock1){
         now = (rioStart - Date.now()) / 1000;
-    }else if (type === 'reg2'){
+    }else if (type === 'reg2' && clock === clock2){
         now = (deathStart - Date.now()) / 1000;
-    }else if(type === 'slomo'){
+    }else if(type === 'slomo' && clock){
         now = --now;
     }
 };
@@ -93,22 +93,24 @@ function TimerVisible(firstClock, secondClock){
 // Call the setInterval function which will update our counter ever second
 
 function slowMoWrapper(clock){
+        clearInterval(time);
         slowMo = setInterval(
         function(){
-            getNewTime('slomo');
+            getNewTime('slomo', clock);
             updateCounter(clock);
         }, 3000);
-    clearInterval(time);
 };
 
-Visibility();
 function timeWrapper(){
     time = setInterval(
     function(){
-        getNewTime('reg');
+        getNewTime('reg', clock1);
         updateCounter(clock1);
-        getNewTime('reg2');
+        getNewTime('reg2', clock2);
         updateCounter(clock2);
     }, 1000);
+    clearInterval(slowMo);
 }
+
 timeWrapper();
+Visibility();

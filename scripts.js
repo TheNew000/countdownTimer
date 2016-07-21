@@ -14,9 +14,11 @@ var time;
 function getNewTime(type, clock){
     if (type === 'reg' && clock === clock1){
         now = (rioStart - Date.now()) / 1000;
+    }else if(type === 'slomo' && clock === clock1){
+        now = --now;
     }else if (type === 'reg2' && clock === clock2){
         now = (deathStart - Date.now()) / 1000;
-    }else if(type === 'slomo' && clock){
+    }else if(type === 'slomo' && clock === clock2){
         now = --now;
     }
 };
@@ -94,6 +96,11 @@ function TimerVisible(firstClock, secondClock){
 
 function slowMoWrapper(clock){
         clearInterval(time);
+        if(clock === clock1){
+            now = (rioStart - Date.now()) / 1000;
+        }else{
+            now = (deathStart - Date.now()) / 1000;
+        }
         slowMo = setInterval(
         function(){
             getNewTime('slomo', clock);

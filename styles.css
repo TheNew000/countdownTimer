@@ -2,8 +2,31 @@ body{
     background-color: #00ECB9;
 }
 
+.buttontext{
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+}
+
+.stop .buttontext{
+    color: black;
+}
+
+.slow button, .stop button, .restart button{
+    border: none;
+    background-color: #00ECB9;
+    position: relative;
+}
+
 #buttons{
     text-align: center;
+}
+
+img{
+    width: 100%;
+    border-radius: 50%;
+    padding-top: 20px;
+
 }
 
 h1{
@@ -18,11 +41,13 @@ h1{
     text-align: center;
 }
 
-#countdown-timer1 > div, #countdown-timer2 > div{
+.seconds, .minutes, .hours, .days, .weeks{
     padding: 10px;
     border-radius: 3px;
     background-color: #00DF96;
     display: inline-block;
+    text-align: center;
+    width: 8%;
 }
 
 #countdown-timer1 div > span, #countdown-timer2 div > span{
@@ -32,7 +57,13 @@ h1{
     display: inline-block;
 }
 
+div.slow, div.stop, div.restart{
+    display: inline-block;
+    height: 250px;
+    width: 250px;
+    text-align: center;
+}
+
 .small-text{
     font-size: 28px;
-
 }

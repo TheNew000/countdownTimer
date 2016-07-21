@@ -5,32 +5,40 @@ var deathStart = new Date('January 20, 2017 19:00').getTime();
 var secondsInAnHour = 60 * 60;
 var secondsInADay = 60 * 60 * 24;
 var secondsInAWeek = secondsInADay * 7;
-var clock1Gone = document.getElementById("countdown-timer1");
-var clock2Gone = document.getElementById("countdown-timer2")
+var clock1 = document.getElementById("countdown-timer1");
+var clock2 = document.getElementById("countdown-timer2")
+var now = Date.now();
+var slowMo;
+var time;
 
+function getNewTime(type){
+    if (type === 'reg'){
+        now = (rioStart - Date.now()) / 1000;
+    }else if (type === 'reg2'){
+        now = (deathStart - Date.now()) / 1000;
+    }else if(type === 'slomo'){
+        now = --now;
+    }
+};
 
-
-function updateCounter(endDate, timer){
+function updateCounter(timer){
     var secondsDigit = timer.querySelector('.seconds-number');
     var minutesDigit = timer.querySelector('.minutes-number');
     var hoursDigit = timer.querySelector('.hours-number');
     var daysDigit = timer.querySelector('.days-number');
     var weeksDigit = timer.querySelector('.weeks-number');
-    var now = Date.now();
-    var getTimeTill = (endDate - now) / 1000;
     // var rioStart = Date.parse('August 5, 2016');
     // Get various units of time until event
-    var seconds = Math.floor(getTimeTill % 60);
-    var minutes = Math.floor(getTimeTill / 60) % 60;
-    var hours = Math.floor(getTimeTill / secondsInAnHour) % 24;
-    var days = Math.floor(getTimeTill / secondsInADay) % 7;
-    var weeks = Math.floor(getTimeTill / secondsInAWeek) % 52;
+    var seconds = Math.floor(now % 60);
+    var minutes = Math.floor(now / 60) % 60;
+    var hours = Math.floor(now / secondsInAnHour) % 24;
+    var days = Math.floor(now / secondsInADay) % 7;
+    var weeks = Math.floor(now / secondsInAWeek) % 52;
     secondsDigit.innerHTML = seconds;
     minutesDigit.innerHTML = minutes;
     hoursDigit.innerHTML = hours;
     daysDigit.innerHTML = days;
     weeksDigit.innerHTML = weeks;
-    console.log(seconds);
 }
 
 // function updateCounter2(endDate){
@@ -41,14 +49,14 @@ function updateCounter(endDate, timer){
 //     var daysDigit = countdownTimer.querySelector('.days-number');
 //     var weeksDigit = countdownTimer.querySelector('.weeks-number');
 //     var now = Date.now();
-//     var getTimeTill = (endDate - now) / 1000;
+//     var now = (endDate - now) / 1000;
 //     // var rioStart = Date.parse('August 5, 2016');
 // // Get various units of time until event
-//     var seconds = Math.floor(getTimeTill % 60);
-//     var minutes = Math.floor(getTimeTill / 60) % 60;
-//     var hours = Math.floor(getTimeTill / secondsInAnHour) % 24;
-//     var days = Math.floor(getTimeTill / secondsInADay) % 7;
-//     var weeks = Math.floor(getTimeTill / secondsInAWeek) % 52;
+//     var seconds = Math.floor(now % 60);
+//     var minutes = Math.floor(now / 60) % 60;
+//     var hours = Math.floor(now / secondsInAnHour) % 24;
+//     var days = Math.floor(now / secondsInADay) % 7;
+//     var weeks = Math.floor(now / secondsInAWeek) % 52;
 //     secondsDigit.innerHTML = seconds;
 //     minutesDigit.innerHTML = minutes;
 //     hoursDigit.innerHTML = hours;
@@ -57,21 +65,22 @@ function updateCounter(endDate, timer){
 // }
 
 function Visibility(){
-    clock1Gone.style.visibility = "hidden";
-    clock2Gone.style.visibility = "hidden";
+    clock1.style.display = "none";
+    clock2.style.display = "none";
 }
 // function Timer1Visible(f){
 //     if(f == true){
-//         document.getElementById("countdown-timer").style.visibility = "visible";
+//         document.getElementById("countdown-timer").style.visibdisplayility = "visible";
 //     }
 // }
-function TimerVisible(clock1, clock2){
-    if (clock1.style.visibility == "visible" && clock2.style.visibility == "hidden"){
-        clock1.style.visibility = "hidden";
-    }else if(clock1.style.visibility == "hidden" && clock2.style.visibility == "hidden") {
-        clock1.style.visibility = "visible";
-    }else if(TimerVisible(clock2, clock1)){
-        clock1.style.visibility = "visible";
+function TimerVisible(firstClock, secondClock){
+    if (firstClock.style.display === "none" && secondClock.style.display === "block"){
+        secondClock.style.display = "none";
+        firstClock.style.display = "block";
+    }else if(firstClock.style.display == "block"){
+        firstClock.style.display = "none";
+    }else if(firstClock.style.display == "none") {
+        firstClock.style.display = "block";
     }
 }
 // set the HTML of the given unit with the new amount
@@ -82,6 +91,24 @@ function TimerVisible(clock1, clock2){
     // console.log(document.getElementsByTagName('span')[0]);
 
 // Call the setInterval function which will update our counter ever second
+
+function slowMoWrapper(clock){
+        slowMo = setInterval(
+        function(){
+            getNewTime('slomo');
+            updateCounter(clock);
+        }, 3000);
+    clearInterval(time);
+};
+
 Visibility();
-setInterval(updateCounter(rioStart, clock1Gone), 1000);
-// setInterval(updateCounter(deathStart, clock2Gone), 1000);
+function timeWrapper(){
+    time = setInterval(
+    function(){
+        getNewTime('reg');
+        updateCounter(clock1);
+        getNewTime('reg2');
+        updateCounter(clock2);
+    }, 1000);
+}
+timeWrapper();

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Countdown to Rio - Olympics 2016</title>
+    <title>Countdown Timers!</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="buttons">
-        <button onclick="TimerVisible(clock1Gone, clock2Gone);" >Counter 1</button>
-        <button onclick="TimerVisible(clock2Gone, clock1Gone);">Counter 2</button>
+        <button onclick="TimerVisible(clock1, clock2);" >Counter 1</button>
+        <button onclick="TimerVisible(clock2, clock1);">Counter 2</button>
     </div>
     <!-- Wrapper for our Countdown   -->
     <div class="countdown-timer">   
         <div id="countdown-timer1">
-            <h1>Countdown to Rio</h1>
+            <h1>Countdown to Rio - Olympics 2016</h1>
             <div class="weeks">
                 <span class="weeks-number">5</span>
                 <div class="small-text">Weeks</div>
@@ -33,8 +33,18 @@
                 <span class="seconds-number">5</span>
                 <div class="small-text">Seconds</div>
             </div>
+            <br>
+            <div class="slow">
+                <button onclick="slowMoWrapper(clock1);"><div class="buttontext">Check out what I can do!</div><img src="slomo.jpg"></button>
+            </div>
+            <div class="stop">
+                <button onclick="clearInterval(slowMo); clearInterval(time);"> <div class="buttontext">You think THAT'S impressive?!?!</div><img src="rick.jpg"></button>
+            </div>
+            <div class="restart">
+                <button onclick="timeWrapper();"><div class="buttontext">Stop messing around guys!!!!</div><img src="morty.png"></button>
+            </div>
         </div>
-
+            
         <div id="countdown-timer2">
             <h1>Countdown to Destruction</h1>
             <div class="weeks">
@@ -56,6 +66,16 @@
             <div class="seconds">
                 <span class="seconds-number">5</span>
                 <div class="small-text">Seconds</div>
+            </div>
+            <br>
+            <div class="slow">
+                <button onclick="slowMoWrapper(clock2);"><div class="buttontext">Check out what I can do!</div><img src="slomo.jpg"></button>
+            </div>
+            <div class="stop">
+                <button onclick="clearInterval(slowMo); clearInterval(time);"> <div class="buttontext">You think THAT'S impressive?!?!</div><img src="rick.jpg"></button>
+            </div>
+            <div class="restart">
+                <button onclick="timeWrapper();"><div class="buttontext">Stop messing around guys!!!!</div><img src="morty.png"></button>
             </div>
         </div>
     </div> 

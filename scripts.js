@@ -6,7 +6,7 @@ var secondsInAnHour = 60 * 60;
 var secondsInADay = 60 * 60 * 24;
 var secondsInAWeek = secondsInADay * 7;
 var clock1 = document.getElementById("countdown-timer1");
-var clock2 = document.getElementById("countdown-timer2")
+var clock2 = document.getElementById("countdown-timer2");
 var now = Date.now();
 var slowMo;
 var time;

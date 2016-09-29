@@ -11,6 +11,7 @@ var now = Date.now();
 var slowMo;
 var time;
 
+//Get's the current time right now and let's us know whether we want it stopped, slowed down or regular
 function getNewTime(type, clock){
     if (type === 'reg' && clock === clock1){
         now = (rioStart - Date.now()) / 1000;
@@ -23,6 +24,7 @@ function getNewTime(type, clock){
     }
 };
 
+//Updates the counter so that you can see the time ticking down
 function updateCounter(timer){
     var secondsDigit = timer.querySelector('.seconds-number');
     var minutesDigit = timer.querySelector('.minutes-number');
@@ -43,38 +45,13 @@ function updateCounter(timer){
     weeksDigit.innerHTML = weeks;
 }
 
-// function updateCounter2(endDate){
-//     var countdownTimer = document.getElementById('countdown-timer2');
-//     var secondsDigit = countdownTimer.querySelector('.seconds-number');
-//     var minutesDigit = countdownTimer.querySelector('.minutes-number');
-//     var hoursDigit = countdownTimer.querySelector('.hours-number');
-//     var daysDigit = countdownTimer.querySelector('.days-number');
-//     var weeksDigit = countdownTimer.querySelector('.weeks-number');
-//     var now = Date.now();
-//     var now = (endDate - now) / 1000;
-//     // var rioStart = Date.parse('August 5, 2016');
-// // Get various units of time until event
-//     var seconds = Math.floor(now % 60);
-//     var minutes = Math.floor(now / 60) % 60;
-//     var hours = Math.floor(now / secondsInAnHour) % 24;
-//     var days = Math.floor(now / secondsInADay) % 7;
-//     var weeks = Math.floor(now / secondsInAWeek) % 52;
-//     secondsDigit.innerHTML = seconds;
-//     minutesDigit.innerHTML = minutes;
-//     hoursDigit.innerHTML = hours;
-//     daysDigit.innerHTML = days;
-//     weeksDigit.innerHTML = weeks;
-// }
-
+//Depending on what you click in the beginning
 function Visibility(){
     clock1.style.display = "none";
     clock2.style.display = "none";
 }
-// function Timer1Visible(f){
-//     if(f == true){
-//         document.getElementById("countdown-timer").style.visibdisplayility = "visible";
-//     }
-// }
+
+//Makes the correct clock visible
 function TimerVisible(firstClock, secondClock){
     if (firstClock.style.display === "none" && secondClock.style.display === "block"){
         secondClock.style.display = "none";
@@ -92,8 +69,9 @@ function TimerVisible(firstClock, secondClock){
     // console.log(document.getElementsByClassName('weeks-number')[0]);
     // console.log(document.getElementsByTagName('span')[0]);
 
-// Call the setInterval function which will update our counter ever second
+// Call the setInterval function which will update our counter every second
 
+// Slows down the time!
 function slowMoWrapper(clock){
         clearInterval(time);
         if(clock === clock1){
@@ -108,7 +86,9 @@ function slowMoWrapper(clock){
         }, 3000);
 };
 
+// Resets the time to the timing chosen
 function timeWrapper(){
+    clearInterval(slowMo);
     time = setInterval(
     function(){
         getNewTime('reg', clock1);
@@ -116,7 +96,6 @@ function timeWrapper(){
         getNewTime('reg2', clock2);
         updateCounter(clock2);
     }, 1000);
-    clearInterval(slowMo);
 }
 
 timeWrapper();
